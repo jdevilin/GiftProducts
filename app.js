@@ -75,7 +75,7 @@ app.get('/search', (req, res) => {
 
 
 
-app.get('/imgsearch',function(req, res)
+app.get('/imgsearch',function(req, res){
     if(req.query.name === undefined) {
         req.query.name ="More";
     }
