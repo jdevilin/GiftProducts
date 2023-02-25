@@ -138,8 +138,17 @@ app.get('/imgsearchbyname', function(req, res) {
     if(req.query.name === undefined) {
         req.query.name ="More";
     }
-    var result = req.query.name;
-    imgModel.find({result}, (err, items) => {
+    var array = req.query.name.split(',');
+    var key = " name :"
+    var string = "";
+    var result = [];
+
+    for (const val of array) {
+        result.push({name: val.trim()});
+        string = string + "{" + key + ' ' + "'" + val.trim() + "'},";
+    }
+    string = string.substr(0, string.length - 1)
+    imgModel.find({$or: result}, (err, items) => {
         if (err) {
             console.log(err);
             res.status(500).send('An error occurred', err);
