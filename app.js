@@ -153,10 +153,13 @@ app.get('/imgsearchbyname', function(req, res) {
             console.log(err);
             res.status(500).send('An error occurred', err);
         } else {
-
-            res.contentType(items[0].img.contentType);
-            res.send(items[0].img.data);
-
+            if(items.length==0){
+                res.status(400).send('No document get for this name');
+            }
+            else {
+                res.contentType(items[0].img.contentType);
+                res.send(items[0].img.data);
+            }
         }
     });
 
